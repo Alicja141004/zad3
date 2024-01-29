@@ -1,17 +1,11 @@
-name: Python Tests
+import unittest
+from calculator import add
 
-on: [push, pull_request]
+class TestCalculator(unittest.TestCase):
+    def test_addition(self):
+        self.assertEqual(add(3, 5), 8)
+        self.assertEqual(add(-1, 1), 0)
+        self.assertEqual(add(0, 0), 0)
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-    - name: Run tests
-      run: python -m unittest discover -s tests
+if __name__ == '__main__':
+    unittest.main()
